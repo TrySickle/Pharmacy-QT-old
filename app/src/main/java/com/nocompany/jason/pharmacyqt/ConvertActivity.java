@@ -7,6 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConvertActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private Spinner convertSpinner;
@@ -16,22 +19,27 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert);
         convertSpinner = (Spinner) findViewById(R.id.convert_total_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinner_array, android.R.layout.simple_spinner_item);
+        List<String> categories = new ArrayList<>();
+        categories.add("days");
+        categories.add("ml");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         convertSpinner.setAdapter(adapter);
         convertSpinner.setOnItemSelectedListener(this);
+        int spinnerPosition = adapter.getPosition("days");
+        convertSpinner.setSelection(spinnerPosition);
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
-        convertSpinner.setSelection(pos);
+        String item = parent.getItemAtPosition(pos).toString();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
-        convertSpinner.setSelection(0);
+        //convertSpinner.setSelection(0);
     }
 }

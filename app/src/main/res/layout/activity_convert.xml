@@ -72,17 +72,20 @@
         android:id="@+id/convert_total"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/convert_mg"
-        android:layout_toRightOf="@id/convert_ml_text"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:layout_below="@+id/convert_ml"
+        android:layout_toLeftOf="@+id/convert_times"
+        android:layout_toStartOf="@+id/convert_times" />
 
     <Spinner
         android:id="@+id/convert_total_spinner"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/convert_mg"
-        android:layout_toRightOf="@id/convert_total"
-        android:layout_toEndOf="@id/convert_total">
+        android:textAlignment="textEnd"
+        android:gravity="end"
+        android:layout_below="@+id/convert_times"
+        android:layout_alignRight="@+id/convert_times_text"
+        android:layout_alignEnd="@+id/convert_times_text">
     </Spinner>
 
 </RelativeLayout>
