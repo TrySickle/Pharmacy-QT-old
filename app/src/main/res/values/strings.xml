@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pharmacy QT</string>
+    <string name="convert">Convert</string>
+    <string name="days">Days of Supply</string>
+    <string name="convert_name_hint">Enter Drug Name</string>
+    <string name="convert_mg">mg</string>
+    <string name="convert_ml">ml</string>
+    <string name="convert_times">x/Day</string>
+</resources>
