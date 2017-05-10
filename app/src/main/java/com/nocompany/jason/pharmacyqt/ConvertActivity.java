@@ -102,15 +102,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         TextView totalInMl = (TextView) findViewById(R.id.convert_total_ml);
         if (totalSpinner.getSelectedItem().toString().equals("days")) {
             try {
-                BigDecimal i_mg = getMg();
-                BigDecimal i_ml = getMl();
-                BigDecimal i_amountInMl = getAmount();
-                BigDecimal i_timesPerDay = getTimes();
-                BigDecimal i_total = getTotal();
-
-                BigDecimal dosage = i_mg.divide(i_ml, MathContext.DECIMAL32).multiply(i_amountInMl);
-                totalInMl.setText(String.format(Locale.US, "%s ml", dosage.multiply(i_timesPerDay).multiply(i_total).toString()));
-
+                totalInMl.setText(String.format(Locale.US, "%s ml", calculateTotal(getAmount(), getTotal()).toString()));
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
             }
@@ -119,45 +111,66 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
+    private BigDecimal calculateTotal(BigDecimal amountInMl, BigDecimal days) {
+        BigDecimal i_timesPerDay = getTimes();
+        return amountInMl.multiply(i_timesPerDay).multiply(days);
+    }
+
     public void convertClick(View view) {
         try {
-            BigDecimal i_mg = getMg();
-            BigDecimal i_ml = getMl();
-            BigDecimal i_amountInMl = getAmount();
             BigDecimal i_timesPerDay = getTimes();
             BigDecimal i_total = getTotal();
-            BigDecimal i_mg2 = getMg2();
-            BigDecimal i_ml2 = getMl2();
 
-            BigDecimal dosage = i_mg.divide(i_ml, MathContext.DECIMAL32).multiply(i_amountInMl);
-            BigDecimal newDosage = dosage.multiply(i_ml2).divide(i_mg2, MathContext.DECIMAL32);
+            BigDecimal dosage = getDosage(getMg(), getMl(), getAmount());
+            BigDecimal newAmount = getNewAmount(dosage, getMg2(), getMl2());
 
             BigDecimal totalInDays;
             if (totalSpinner.getSelectedItem().toString().equals("ml")) {
-                totalInDays = i_total.divide(dosage.multiply(i_timesPerDay), MathContext.DECIMAL32);
+                totalInDays = i_total.divide(getAmount().multiply(i_timesPerDay), MathContext.DECIMAL32);
             } else {
                 totalInDays = i_total;
             }
 
-            // Take newDosage either times per day or every x hours, for totalInDays, new amount prescribed
+            // Take newAmount either times per day or every x hours, for totalInDays, new amount prescribed
 
             if (timesSpinner.getSelectedItem().toString().equals("hours")) {
                 if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
-                    converted.setText(String.format(Locale.US, "Take %s tsp every %d hours for %s days", newDosage.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), 24 / i_timesPerDay.intValue(), totalInDays.toString()));
+                    converted.setText(String.format(Locale.US, "Take %s tsp every %d hours for %s days, %s ml total",
+                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), 24 / i_timesPerDay.intValue(),
+                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
                 } else {
-                    converted.setText(String.format(Locale.US, "Take %s ml every %d hours for %s days", newDosage.toString(), 24 / i_timesPerDay.intValue(), totalInDays.toString()));
+                    converted.setText(String.format(Locale.US, "Take %s ml every %d hours for %s days, %s ml total",
+                            newAmount.toString(), 24 / i_timesPerDay.intValue(),
+                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
                 }
             } else {
                 if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
-                    converted.setText(String.format(Locale.US, "Take %s tsp %s times per day for %s days", newDosage.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), i_timesPerDay.toString(), totalInDays.toString()));
+                    converted.setText(String.format(Locale.US, "Take %s tsp %s times per day for %s days, %s ml total",
+                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), i_timesPerDay.toString(),
+                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
                 } else {
-                    converted.setText(String.format(Locale.US, "Take %s ml %s times per day for %s days", newDosage.toString(), i_timesPerDay.toString(), totalInDays.toString()));
+                    converted.setText(String.format(Locale.US, "Take %s ml %s times per day for %s days, %s ml total",
+                            newAmount.toString(), i_timesPerDay.toString(),
+                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
                 }
             }
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private BigDecimal getDosage(BigDecimal mg, BigDecimal ml, BigDecimal amountInMl) {
+        return mg.divide(ml, MathContext.DECIMAL32).multiply(amountInMl);
+    }
+
+    private BigDecimal getNewAmount(BigDecimal mg, BigDecimal ml, BigDecimal amountInMl, BigDecimal mg2, BigDecimal ml2) {
+        BigDecimal dosage = getDosage(mg, ml, amountInMl);
+        return getNewAmount(dosage, mg2, ml2);
+    }
+
+    private BigDecimal getNewAmount(BigDecimal dosage, BigDecimal mg2, BigDecimal ml2) {
+        return dosage.multiply(ml2).divide(mg2, MathContext.DECIMAL32);
     }
 
     private BigDecimal getMg() {
