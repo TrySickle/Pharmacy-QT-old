@@ -11,4 +11,5 @@
     <string name="convert_final">Take xxx</string>
     <string name="convert_new">New RX</string>
     <string name="convert_calculate">Calculate</string>
+    <string name="convert_total_ml">Total:</string>
 </resources>

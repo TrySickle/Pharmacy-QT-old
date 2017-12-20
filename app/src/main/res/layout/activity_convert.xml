@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
+    android:textColor="@color/colorText"
     tools:context="com.nocompany.jason.pharmacyqt.ConvertActivity">
 
     <TextView
@@ -24,19 +25,18 @@
 
     <EditText
         android:id="@+id/convert_mg"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_alignBaseline="@+id/convert_mg_text"
-        android:layout_alignBottom="@+id/convert_mg_text"
+        android:layout_alignBaseline="@+id/convert_strength_text"
         android:layout_toRightOf="@+id/convert_strength_text"
-        android:layout_toEndOf="@+id/convert_strength_text" />
+        />
 
     <TextView
         android:id="@+id/convert_mg_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/convert_original"
+        android:layout_alignBaseline="@+id/convert_strength_text"
         android:layout_toRightOf="@id/convert_mg"
         android:layout_toEndOf="@id/convert_mg"
         android:text="@string/convert_mg"
@@ -44,11 +44,10 @@
 
     <EditText
         android:id="@+id/convert_ml"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_alignBaseline="@+id/convert_ml_text"
-        android:layout_alignBottom="@+id/convert_ml_text"
+        android:layout_alignBaseline="@+id/convert_strength_text"
         android:layout_toRightOf="@+id/convert_mg_text"
         android:layout_toEndOf="@+id/convert_mg_text" />
 
@@ -56,7 +55,7 @@
         android:id="@+id/convert_ml_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/convert_original"
+        android:layout_alignBaseline="@+id/convert_strength_text"
         android:layout_toRightOf="@id/convert_ml"
         android:layout_toEndOf="@id/convert_ml"
         android:text="@string/convert_ml"
@@ -75,10 +74,10 @@
 
     <EditText
         android:id="@+id/convert_amount"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_below="@+id/convert_mg"
+        android:layout_alignBaseline="@+id/convert_take_text"
         android:layout_toRightOf="@+id/convert_take_text"
         android:layout_toEndOf="@+id/convert_take_text" />
 
@@ -95,10 +94,10 @@
 
     <EditText
         android:id="@+id/convert_times"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_below="@+id/convert_ml"
+        android:layout_alignBaseline="@+id/convert_take_text"
         android:layout_toRightOf="@+id/convert_amount_spinner"
         android:layout_toEndOf="@+id/convert_amount_spinner" />
 
@@ -126,10 +125,10 @@
 
     <EditText
         android:id="@+id/convert_total"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_below="@+id/convert_amount"
+        android:layout_alignBaseline="@+id/convert_for"
         android:layout_toRightOf="@+id/convert_for"
         android:layout_toEndOf="@+id/convert_for" />
 
@@ -145,24 +144,33 @@
         android:layout_toStartOf="@+id/convert_times" />
 
     <TextView
+        android:id="@+id/convert_total_ml_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/convert_total_ml"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/convert_for"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
         android:id="@+id/convert_total_ml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_above="@+id/convert_new"
-        android:layout_alignLeft="@+id/convert_total_spinner"
-        android:layout_alignStart="@+id/convert_total_spinner" />
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@id/convert_total_ml_text"
+        android:layout_toEndOf="@id/convert_total_ml_text"
+        android:layout_alignBaseline="@id/convert_total_ml_text"/>
 
     <Button
         android:id="@+id/convert_calculate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/convert_calculate"
         android:onClick="calculateClick"
-        android:layout_alignBaseline="@+id/convert_for"
-        android:layout_alignBottom="@+id/convert_for"
-        android:layout_toRightOf="@+id/convert_ml2"
-        android:layout_toEndOf="@+id/convert_ml2" />
+        android:layout_below="@id/convert_total_ml_text" />
 
     <TextView
         android:id="@+id/convert_new"
@@ -170,7 +178,7 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_new"
         android:textSize="30sp"
-        android:layout_above="@+id/convert_strength_text2"
+        android:layout_below="@id/convert_calculate"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -180,13 +188,14 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_strength"
         android:textSize="25sp"
+        android:layout_below="@id/convert_new"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/convert_mg2"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_alignBottom="@+id/convert_strength_text2"
@@ -205,7 +214,7 @@
 
     <EditText
         android:id="@+id/convert_ml2"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_alignBaseline="@+id/convert_mg2"
@@ -231,13 +240,12 @@
         android:textSize="20sp"
         android:layout_above="@+id/convert_button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/convert_button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:text="@string/convert"
         android:onClick="convertClick"
         android:layout_alignParentBottom="true"
