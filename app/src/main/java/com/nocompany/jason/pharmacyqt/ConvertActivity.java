@@ -42,8 +42,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         totalList.add("days");
         totalList.add("ml");
         ArrayAdapter<String> totalAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, totalList);
-        totalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, totalList);
         totalSpinner.setAdapter(totalAdapter);
         totalSpinner.setOnItemSelectedListener(this);
 
@@ -52,8 +51,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         amountList.add("tsp");
         amountList.add("ml");
         ArrayAdapter<String> amountAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, amountList);
-        amountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, amountList);
         amountSpinner.setAdapter(amountAdapter);
         amountSpinner.setOnItemSelectedListener(this);
 
@@ -62,8 +60,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         timesList.add("\u00D7/Day");
         timesList.add("hours");
         ArrayAdapter<String> timesAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, timesList);
-        timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, timesList);
         timesSpinner.setAdapter(timesAdapter);
         timesSpinner.setOnItemSelectedListener(this);
 

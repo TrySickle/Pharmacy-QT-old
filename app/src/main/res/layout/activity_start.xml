@@ -13,15 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textColor="#E8E8E8"
+        android:textSize="20sp"
+        android:background="@drawable/buttonshape"
         android:text="@string/convert"
-        android:onClick="convertClick"/>
+        android:onClick="convertClick"
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/start_days"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textColor="#E8E8E8"
+        android:textSize="20sp"
+        android:background="@drawable/buttonshape"
         android:text="@string/days"
-        android:onClick="daysClick"/>
+        android:onClick="daysClick"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>
