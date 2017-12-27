@@ -1,10 +1,12 @@
 package com.nocompany.jason.pharmacyqt;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -106,6 +108,11 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         } else {
             totalInMl.setText("");
         }
+        View v = this.getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 
     private BigDecimal calculateTotal(BigDecimal amountInMl, BigDecimal days) {
@@ -154,7 +161,11 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
         }
-
+        View v = this.getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 
     private BigDecimal getDosage(BigDecimal mg, BigDecimal ml, BigDecimal amountInMl) {

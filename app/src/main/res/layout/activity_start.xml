@@ -28,7 +28,7 @@
         android:textColor="#E8E8E8"
         android:textSize="20sp"
         android:background="@drawable/buttonshape"
-        android:text="@string/days"
+        android:text="Days of Supply (Work in Progress)"
         android:onClick="daysClick"
         android:layout_margin="10dp"/>
 
