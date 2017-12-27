@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -74,15 +75,20 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         mg2 = (EditText) findViewById(R.id.convert_mg2);
         ml2 = (EditText) findViewById(R.id.convert_ml2);
         converted = (TextView) findViewById(R.id.convert_final);
-//        mg.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        });
+        mg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                ml.requestFocus();
+                return true;
+            }
+        });
+        mg2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                ml2.requestFocus();
+                return true;
+            }
+        });
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,

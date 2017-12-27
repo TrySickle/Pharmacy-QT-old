@@ -34,7 +34,7 @@
         android:layout_alignBaseline="@id/convert_strength_text"
         android:layout_toRightOf="@id/convert_strength_text"
         android:layout_toEndOf="@id/convert_strength_text"
-        />
+        android:nextFocusDown="@+id/convert_mg"/>
 
     <TextView
         android:id="@+id/convert_mg_text"
@@ -213,7 +213,8 @@
         android:inputType="number"
         android:layout_alignBottom="@id/convert_strength_text2"
         android:layout_toRightOf="@id/convert_strength_text2"
-        android:layout_toEndOf="@id/convert_strength_text2" />
+        android:layout_toEndOf="@id/convert_strength_text2"
+        android:nextFocusDown="@+id/convert_ml_text2"/>
 
     <TextView
         android:id="@+id/convert_mg_text2"
