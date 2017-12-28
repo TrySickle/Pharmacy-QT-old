@@ -9,7 +9,7 @@
     <string name="convert_take">Take:</string>
     <string name="convert_for">For:</string>
     <string name="convert_final">Take xxx</string>
-    <string name="convert_new">New RX</string>
+    <string name="convert_new">New RX: </string>
     <string name="convert_calculate">Calculate</string>
-    <string name="convert_total_ml">Total:</string>
+    <string name="convert_total_ml">Total ml:</string>
 </resources>

@@ -30,7 +30,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_alignBaseline="@id/convert_strength_text"
         android:layout_toRightOf="@id/convert_strength_text"
         android:layout_toEndOf="@id/convert_strength_text"
@@ -51,7 +51,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:text="5"
         android:layout_alignBaseline="@id/convert_strength_text"
         android:layout_toRightOf="@id/convert_mg_text"
@@ -81,7 +81,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_alignBaseline="@id/convert_take_text"
         android:layout_toRightOf="@id/convert_take_text"
         android:layout_toEndOf="@id/convert_take_text" />
@@ -102,7 +102,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_below="@id/convert_take_text"
         android:layout_toRightOf="@id/convert_take_text"
         android:layout_toEndOf="@id/convert_take_text"
@@ -134,7 +134,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_alignBaseline="@id/convert_for"
         android:layout_toRightOf="@id/convert_for"
         android:layout_toEndOf="@id/convert_for" />
@@ -170,19 +170,18 @@
         android:layout_toEndOf="@id/convert_total_ml_text"
         android:layout_alignBaseline="@id/convert_total_ml_text"/>
 
-    <Button
-        android:id="@+id/convert_calculate"
-        android:text="@string/convert_calculate"
-        android:textColor="#E8E8E8"
-        android:textSize="20sp"
+    <!--<Button-->
+        <!--android:id="@+id/convert_calculate"-->
+        <!--android:text="@string/convert_calculate"-->
+        <!--android:textColor="#E8E8E8"-->
+        <!--android:textSize="20sp"-->
 
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="calculateClick"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/convert_total_ml_text"
-        android:layout_margin="10dp"/>
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@drawable/buttonshape"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_below="@id/convert_total_ml_text"-->
+        <!--android:layout_margin="10dp"/>-->
 
     <TextView
         android:id="@+id/convert_new"
@@ -190,9 +189,10 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_new"
         android:textSize="30sp"
-        android:layout_below="@id/convert_calculate"
+        android:layout_below="@id/convert_total_ml_text"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/convert_strength_text2"
@@ -200,6 +200,7 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_strength"
         android:textSize="25sp"
+        android:layout_marginTop="60dp"
         android:layout_below="@id/convert_new"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
@@ -210,7 +211,7 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_alignBottom="@id/convert_strength_text2"
         android:layout_toRightOf="@id/convert_strength_text2"
         android:layout_toEndOf="@id/convert_strength_text2"
@@ -231,7 +232,8 @@
         android:gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
+        android:text="5"
         android:layout_alignBaseline="@id/convert_mg2"
         android:layout_alignBottom="@id/convert_mg2"
         android:layout_toRightOf="@id/convert_mg_text2"
@@ -248,25 +250,25 @@
         android:layout_toRightOf="@id/convert_ml2"
         android:layout_toEndOf="@id/convert_ml2" />
 
-    <Button
-        android:id="@+id/convert_button"
-        android:textColor="#E8E8E8"
-        android:textSize="20sp"
-        android:text="@string/convert"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="convertClick"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+    <!--<Button-->
+        <!--android:id="@+id/convert_button"-->
+        <!--android:textColor="#E8E8E8"-->
+        <!--android:textSize="20sp"-->
+        <!--android:text="@string/convert"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@drawable/buttonshape"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
     <TextView
         android:id="@+id/convert_final"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_above="@id/convert_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@id/convert_new"
+        android:layout_toRightOf="@id/convert_new"
+        android:layout_toEndOf="@id/convert_new"/>
 
 </RelativeLayout>

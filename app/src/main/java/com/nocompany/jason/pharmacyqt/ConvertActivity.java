@@ -75,6 +75,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         mg2 = (EditText) findViewById(R.id.convert_mg2);
         ml2 = (EditText) findViewById(R.id.convert_ml2);
         converted = (TextView) findViewById(R.id.convert_final);
+        // fixing the next button
         mg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -87,6 +88,168 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 ml2.requestFocus();
                 return true;
+            }
+        });
+        // spinners listeners
+        amountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                calculateClick();
+                convertClick();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+        timesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                calculateClick();
+                convertClick();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+        totalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                calculateClick();
+                convertClick();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+        // edittext listeners
+//        times = (EditText) findViewById(R.id.convert_times);
+//        total = (EditText) findViewById(R.id.convert_total);
+//        mg2 = (EditText) findViewById(R.id.convert_mg2);
+//        ml2 = (EditText
+        mg.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                calculateClick();
+                convertClick();
+            }
+        });
+        ml.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                calculateClick();
+                convertClick();
+            }
+        });
+        amount.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                calculateClick();
+                convertClick();
+            }
+        });
+        times.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                calculateClick();
+                convertClick();
+            }
+        });
+        total.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                calculateClick();
+                convertClick();
+            }
+        });
+        mg2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                convertClick();
+            }
+        });
+        ml2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                convertClick();
             }
         });
     }
@@ -103,30 +266,30 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
         // Another interface callback
     }
 
-    public void calculateClick(View view) {
+    public void calculateClick() {
         TextView totalInMl = (TextView) findViewById(R.id.convert_total_ml);
         if (totalSpinner.getSelectedItem().toString().equals("days")) {
             try {
                 totalInMl.setText(String.format(Locale.US, "%s ml", calculateTotal(getAmount(), getTotal()).toString()));
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
             }
         } else {
-            totalInMl.setText("");
+            try {
+                totalInMl.setText(String.format(Locale.US, "%s ml", total.getText().toString()));
+            } catch (NumberFormatException e) {
+                //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+            }
         }
-        View v = this.getCurrentFocus();
-        if (v != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        }
+
     }
 
     private BigDecimal calculateTotal(BigDecimal amountInMl, BigDecimal days) {
         BigDecimal i_timesPerDay = getTimes();
-        return amountInMl.multiply(i_timesPerDay).multiply(days);
+        return amountInMl.multiply(i_timesPerDay).multiply(days, MathContext.DECIMAL32);
     }
 
-    public void convertClick(View view) {
+    public void convertClick() {
         try {
             BigDecimal i_timesPerDay = getTimes();
             BigDecimal i_total = getTotal();
@@ -144,34 +307,33 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
             // Take newAmount either times per day or every x hours, for totalInDays, new amount prescribed
 
             if (timesSpinner.getSelectedItem().toString().equals("hours")) {
-                if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
-                    converted.setText(String.format(Locale.US, "Take %s tsp every %d hours for %s days, %s ml total",
-                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), 24 / i_timesPerDay.intValue(),
-                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
-                } else {
+//                if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
+//                    converted.setText(String.format(Locale.US, "Take %s tsp every %d hours for %s days, %s ml total",
+//                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), 24 / i_timesPerDay.intValue(),
+//                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
+//                } else {
                     converted.setText(String.format(Locale.US, "Take %s ml every %d hours for %s days, %s ml total",
                             newAmount.toString(), 24 / i_timesPerDay.intValue(),
                             totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
-                }
             } else {
-                if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
-                    converted.setText(String.format(Locale.US, "Take %s tsp %s times per day for %s days, %s ml total",
-                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), i_timesPerDay.toString(),
-                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
-                } else {
+//                if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
+//                    converted.setText(String.format(Locale.US, "Take %s tsp %s times per day for %s days, %s ml total",
+//                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), i_timesPerDay.toString(),
+//                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
+//                } else {
                     converted.setText(String.format(Locale.US, "Take %s ml %s times per day for %s days, %s ml total",
                             newAmount.toString(), i_timesPerDay.toString(),
                             totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
-                }
             }
+
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
         }
-        View v = this.getCurrentFocus();
-        if (v != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        }
+//        View v = this.getCurrentFocus();
+//        if (v != null) {
+//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//        }
     }
 
     private BigDecimal getDosage(BigDecimal mg, BigDecimal ml, BigDecimal amountInMl) {
