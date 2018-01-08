@@ -131,10 +131,6 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
 
         });
         // edittext listeners
-//        times = (EditText) findViewById(R.id.convert_times);
-//        total = (EditText) findViewById(R.id.convert_total);
-//        mg2 = (EditText) findViewById(R.id.convert_mg2);
-//        ml2 = (EditText
         mg.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -272,13 +268,13 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
             try {
                 totalInMl.setText(String.format(Locale.US, "%s ml", calculateTotal(getAmount(), getTotal()).toString()));
             } catch (NumberFormatException e) {
-                //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+                totalInMl.setText("");
             }
         } else {
             try {
                 totalInMl.setText(String.format(Locale.US, "%s ml", total.getText().toString()));
             } catch (NumberFormatException e) {
-                //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+                totalInMl.setText("");
             }
         }
 
@@ -327,13 +323,8 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
             }
 
         } catch (NumberFormatException e) {
-            //Toast.makeText(this, "Must enter all information", Toast.LENGTH_SHORT).show();
+            converted.setText("");
         }
-//        View v = this.getCurrentFocus();
-//        if (v != null) {
-//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//        }
     }
 
     private BigDecimal getDosage(BigDecimal mg, BigDecimal ml, BigDecimal amountInMl) {
