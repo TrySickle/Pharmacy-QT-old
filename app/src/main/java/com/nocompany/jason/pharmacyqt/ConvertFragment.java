@@ -1,19 +1,20 @@
 package com.nocompany.jason.pharmacyqt;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -21,7 +22,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ConvertActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ConvertFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ConvertFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ConvertFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
     private Spinner totalSpinner;
     private Spinner amountSpinner;
@@ -34,47 +52,80 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
     private EditText mg2;
     private EditText ml2;
     private TextView converted;
+    private View view;
+
+    public ConvertFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ConvertFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static ConvertFragment newInstance(String param1, String param2) {
+        ConvertFragment fragment = new ConvertFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_convert);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
-        totalSpinner = (Spinner) findViewById(R.id.convert_total_spinner);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_convert, container, false);
+
+        totalSpinner = (Spinner) view.findViewById(R.id.convert_total_spinner);
         List<String> totalList = new ArrayList<>();
         totalList.add("days");
         totalList.add("ml");
-        ArrayAdapter<String> totalAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> totalAdapter = new ArrayAdapter<String>(this.getContext(),
                 R.layout.spinner_item, totalList);
         totalSpinner.setAdapter(totalAdapter);
         totalSpinner.setOnItemSelectedListener(this);
 
-        amountSpinner = (Spinner) findViewById(R.id.convert_amount_spinner);
+        amountSpinner = (Spinner) view.findViewById(R.id.convert_amount_spinner);
         List<String> amountList = new ArrayList<>();
         amountList.add("tsp");
         amountList.add("ml");
-        ArrayAdapter<String> amountAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> amountAdapter = new ArrayAdapter<String>(this.getContext(),
                 R.layout.spinner_item, amountList);
         amountSpinner.setAdapter(amountAdapter);
         amountSpinner.setOnItemSelectedListener(this);
 
-        timesSpinner = (Spinner) findViewById(R.id.convert_times_spinner);
+        timesSpinner = (Spinner) view.findViewById(R.id.convert_times_spinner);
         List<String> timesList = new ArrayList<>();
         timesList.add("\u00D7/Day");
         timesList.add("hours");
-        ArrayAdapter<String> timesAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> timesAdapter = new ArrayAdapter<String>(this.getContext(),
                 R.layout.spinner_item, timesList);
         timesSpinner.setAdapter(timesAdapter);
         timesSpinner.setOnItemSelectedListener(this);
 
-        mg = (EditText) findViewById(R.id.convert_mg);
-        ml = (EditText) findViewById(R.id.convert_ml);
-        amount = (EditText)findViewById(R.id.convert_amount);
-        times = (EditText) findViewById(R.id.convert_times);
-        total = (EditText) findViewById(R.id.convert_total);
-        mg2 = (EditText) findViewById(R.id.convert_mg2);
-        ml2 = (EditText) findViewById(R.id.convert_ml2);
-        converted = (TextView) findViewById(R.id.convert_final);
+        mg = (EditText) view.findViewById(R.id.convert_mg);
+        ml = (EditText) view.findViewById(R.id.convert_ml);
+        amount = (EditText)view.findViewById(R.id.convert_amount);
+        times = (EditText) view.findViewById(R.id.convert_times);
+        total = (EditText) view.findViewById(R.id.convert_total);
+        mg2 = (EditText) view.findViewById(R.id.convert_mg2);
+        ml2 = (EditText) view.findViewById(R.id.convert_ml2);
+        converted = (TextView) view.findViewById(R.id.convert_final);
         // fixing the next button
         mg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -248,6 +299,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
                 convertClick();
             }
         });
+        return view;
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
@@ -263,7 +315,7 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void calculateClick() {
-        TextView totalInMl = (TextView) findViewById(R.id.convert_total_ml);
+        TextView totalInMl = (TextView) view.findViewById(R.id.convert_total_ml);
         if (totalSpinner.getSelectedItem().toString().equals("days")) {
             try {
                 totalInMl.setText(String.format(Locale.US, "%s ml", calculateTotal(getAmount(), getTotal()).toString()));
@@ -308,18 +360,18 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
 //                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), 24 / i_timesPerDay.intValue(),
 //                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
 //                } else {
-                    converted.setText(String.format(Locale.US, "Take %s ml every %d hours for %s days, %s ml total",
-                            newAmount.toString(), 24 / i_timesPerDay.intValue(),
-                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
+                converted.setText(String.format(Locale.US, "Take %s ml every %d hours for %s days, %s ml total",
+                        newAmount.toString(), 24 / i_timesPerDay.intValue(),
+                        totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
             } else {
 //                if (amountSpinner.getSelectedItem().toString().equals("tsp")) {
 //                    converted.setText(String.format(Locale.US, "Take %s tsp %s times per day for %s days, %s ml total",
 //                            newAmount.divide(new BigDecimal(5), MathContext.DECIMAL32).toString(), i_timesPerDay.toString(),
 //                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
 //                } else {
-                    converted.setText(String.format(Locale.US, "Take %s ml %s times per day for %s days, %s ml total",
-                            newAmount.toString(), i_timesPerDay.toString(),
-                            totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
+                converted.setText(String.format(Locale.US, "Take %s ml %s times per day for %s days, %s ml total",
+                        newAmount.toString(), i_timesPerDay.toString(),
+                        totalInDays.toString(), calculateTotal(newAmount, totalInDays).toString()));
             }
 
         } catch (NumberFormatException e) {
@@ -373,5 +425,15 @@ public class ConvertActivity extends AppCompatActivity implements AdapterView.On
 
     private BigDecimal getMl2() {
         return new BigDecimal(ml2.getText().toString());
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }

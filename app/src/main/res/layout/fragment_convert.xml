@@ -8,7 +8,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
-    tools:context="com.nocompany.jason.pharmacyqt.ConvertActivity">
+    tools:context="com.nocompany.jason.pharmacyqt.ConvertFragment">
 
     <TextView
         android:id="@+id/convert_original"
@@ -171,17 +171,17 @@
         android:layout_alignBaseline="@id/convert_total_ml_text"/>
 
     <!--<Button-->
-        <!--android:id="@+id/convert_calculate"-->
-        <!--android:text="@string/convert_calculate"-->
-        <!--android:textColor="#E8E8E8"-->
-        <!--android:textSize="20sp"-->
+    <!--android:id="@+id/convert_calculate"-->
+    <!--android:text="@string/convert_calculate"-->
+    <!--android:textColor="#E8E8E8"-->
+    <!--android:textSize="20sp"-->
 
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:background="@drawable/buttonshape"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@id/convert_total_ml_text"-->
-        <!--android:layout_margin="10dp"/>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:background="@drawable/buttonshape"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_below="@id/convert_total_ml_text"-->
+    <!--android:layout_margin="10dp"/>-->
 
     <TextView
         android:id="@+id/convert_new"
@@ -251,15 +251,15 @@
         android:layout_toEndOf="@id/convert_ml2" />
 
     <!--<Button-->
-        <!--android:id="@+id/convert_button"-->
-        <!--android:textColor="#E8E8E8"-->
-        <!--android:textSize="20sp"-->
-        <!--android:text="@string/convert"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:background="@drawable/buttonshape"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true" />-->
+    <!--android:id="@+id/convert_button"-->
+    <!--android:textColor="#E8E8E8"-->
+    <!--android:textSize="20sp"-->
+    <!--android:text="@string/convert"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:background="@drawable/buttonshape"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true" />-->
 
     <TextView
         android:id="@+id/convert_final"
